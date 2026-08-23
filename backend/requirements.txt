@@ -1,0 +1,9 @@
+sqlalchemy>=2.0
+pydantic>=2.0
+streamlit>=1.35
+pandas
+llama-cpp-python
+pytesseract
+pillow
+pdf2image
+pytest
