@@ -1,0 +1,37 @@
+{
+  "team_id": "REPLACE_WITH_YOUR_TEAM_ID",
+  "domain": "autonomous_ai_agents",
+  "language_scope": ["en"],
+  "african_alpha_claim": true,
+  "budget_laptop_claim": true,
+  "submitter": {
+    "name": "REPLACE_WITH_YOUR_FULL_NAME",
+    "email": "REPLACE_WITH_YOUR_EMAIL",
+    "github_handle": "REPLACE_WITH_YOUR_GITHUB_USERNAME"
+  },
+  "cross_disciplinary_pairing": {
+    "discipline": "public administration / civic governance",
+    "load_bearing": true,
+    "description": "CivicVerify AI is an autonomous document-verification agent for African government offices (universities, civil service registries, embassies). The agent runs the full OCR-to-decision pipeline unattended -- extracting fields from application forms, certificates, and ID documents, cross-checking them against a local registry, applying deterministic fraud-detection rules, and drafting an officer memo -- with a human officer only in the loop for the final approve/reject/escalate call. The civic-governance domain is load-bearing, not cosmetic: the agent's entire task decomposition (field extraction, cross-document consistency checks, registry lookup, risk scoring) is defined by real document-fraud patterns in credential verification, not a generic chatbot task retrofitted to this domain."
+  },
+  "test_prompts": [
+    {
+      "prompt_id": "tp_001",
+      "prompt": "You extract structured candidate fields from noisy OCR text of Nigerian academic/ID documents. Respond with ONLY a JSON object, nothing else -- no markdown fences, no explanation. Exact shape: {\"candidate_name\": string or null, \"date_of_birth\": string or null (ISO YYYY-MM-DD), \"institution\": string or null, \"cert_no\": string or null, \"issue_date\": string or null (ISO date), \"id_number\": string or null, \"expiry_date\": string or null (ISO date, ID documents only)}. If a field is missing or illegible, use null. Never invent a value you don't see in the text.\n\nOCR text: 'APPLICATION FORM Name: Ijeoma Udo Date of Birth: 1975-06-11 Institution: Highland State Polytechnic Certificate No: CVAI-HSP-2019-00001 Issue Date: 2019-03-16'"
+    },
+    {
+      "prompt_id": "tp_002",
+      "prompt": "You draft a short, neutral officer memo (2-4 sentences) summarizing a document verification case for a Nigerian civil service / education officer. State what was checked, list the risk flags plainly, and suggest a next step for the applicant if relevant. Output only the memo text -- no preamble, no sign-off.\n\nCase summary: Candidate: Fatima Nwankwo. Institution: Greenfield City University. Certificate: CVAI-GCU-2019-00015 (registry found=True, status=valid). Risk flags: [high] IDENTITY_DOCUMENT_EXPIRED: ID document's stated expiry (2019-03-07) does not match the expiry declared elsewhere on the application (2027-11-23)."
+    }
+  ],
+  "model": {
+    "name": "Phi-4-mini-Q4_K_M",
+    "runtime": "llama.cpp",
+    "quantization": "GGUF Q4_K_M",
+    "parameters_estimate": "3.8B",
+    "packaging": "binary_bundle"
+  },
+  "_runtime": {
+    "model_path": "model/phi-4-mini-Q4_K_M.gguf"
+  }
+}
