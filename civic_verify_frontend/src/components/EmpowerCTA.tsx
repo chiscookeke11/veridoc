@@ -9,16 +9,6 @@ export default function EmpowerCTA() {
             <h3 className="text-center text-4xl md:text-7xl font-medium " >Empower your teams with AI to make smarter decisions, faster.</h3>
 
 
-            {/* corners */}
-            <span className="  absolute bottom-0 right-0 " >
-                <Plus size={22} color="#071c3f" />
-            </span>
-
-
-            <span className="  absolute bottom-0 left-0 " >
-                <Plus size={22} color="#071c3f" />
-            </span>
-
         </section>
     )
 }
