@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import { use_cases_data } from "../../data/use_cases_data";
 import { useState } from "react";
 import Image from "next/image";
-
+import { motion } from "framer-motion"
 
 
 
@@ -13,7 +13,7 @@ export default function UseCases() {
 
 
     return (
-        <section className="w-full max-w-7xl  mx-auto relative text-black font-season-vf pb-12 md:pb-52 px-8 md:px-0" >
+        <section className="w-full max-w-7xl  mx-auto relative text-black font-season-vf pb-12 md:pb-52 px-8 " >
 
             <hr className="border  border-black/10 " />
 
@@ -49,9 +49,30 @@ export default function UseCases() {
                                 </div>
 
                                 {/* accordion body  */}
-                                <div className={` overflow-hidden font-uncut text-sm md:text-xl text-[#000000] opacity-70
-                                    ${selected === i ? "h-20 max-h-fit py-5" : "h-0 py-0"} duration-300 ease-in-out transition-all `} >
-                                    {use_case.content}
+                                <div
+                                    className={`overflow-hidden font-uncut text-sm md:text-xl text-[#000000] opacity-70
+    ${selected === i ? "h-20 max-h-fit py-5" : "h-0 py-0"}
+    duration-300 ease-in-out transition-all`}
+                                >
+                                    {selected === i && (
+                                        <motion.p
+                                            key={selected}
+                                            initial={{
+                                                y: 30,
+                                                opacity: 0,
+                                            }}
+                                            animate={{
+                                                y: 0,
+                                                opacity: 1,
+                                            }}
+                                            transition={{
+                                                duration: 0.5,
+                                                ease: [0.22, 1, 0.36, 1],
+                                            }}
+                                        >
+                                            {use_case.content}
+                                        </motion.p>
+                                    )}
                                 </div>
                             </div>
                         ))}
