@@ -15,7 +15,7 @@ export default function UseCases() {
     return (
         <section className="w-full max-w-7xl  mx-auto relative text-black font-season-vf pb-12 md:pb-52 px-8 " >
 
-            <hr className="border  border-black/10 " />
+            <div className="w-full h-px bg-black/10" />
 
             <span className="  absolute -top-2.5 left-0 " >
                 <Plus size={20} color="#071c3f" />

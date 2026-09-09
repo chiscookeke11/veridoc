@@ -1,3 +1,4 @@
+import AssuranceSection from "@/components/AssuranceSection";
 import DetailedDescription from "@/components/DetailedDescription";
 import EmpowerCTA from "@/components/EmpowerCTA";
 import Hero from "@/components/Hero";
@@ -14,6 +15,7 @@ export default function Home() {
         <DetailedDescription />
         <EmpowerCTA />
         <UseCases />
+        <AssuranceSection />
       </div>
     </div>
   );
