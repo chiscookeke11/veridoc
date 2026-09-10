@@ -1,3 +1,4 @@
+import AppWorkflow from "@/components/AppWorkflow";
 import AssuranceSection from "@/components/AssuranceSection";
 import DetailedDescription from "@/components/DetailedDescription";
 import EmpowerCTA from "@/components/EmpowerCTA";
@@ -16,6 +17,7 @@ export default function Home() {
         <EmpowerCTA />
         <UseCases />
         <AssuranceSection />
+        <AppWorkflow />
       </div>
     </div>
   );
