@@ -14,3 +14,13 @@ export interface use_cases_data_types {
     icon: string;
     image: string
 }
+
+
+
+export interface steps_data_types {
+    title: string;
+    description: string;
+    img: string;
+    call_to_action: string;
+    color: string
+}
