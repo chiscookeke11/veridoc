@@ -110,7 +110,7 @@ export default function TrustedCompanies() {
                         <Image
                             src={"/people/mr-chidera.webp"}
                             alt={`TheGreyIT Educational Consults`}
-                            width={200} height={200}
+                            width={1000} height={1000}
                             className="h-full w-full object-center object-cover group-hover:scale-110 duration-300 ease-in-out transform cursor-pointer "
                         />
                     </div>
