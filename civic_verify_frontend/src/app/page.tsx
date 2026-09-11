@@ -3,6 +3,7 @@ import AssuranceSection from "@/components/AssuranceSection";
 import DetailedDescription from "@/components/DetailedDescription";
 import EmpowerCTA from "@/components/EmpowerCTA";
 import Hero from "@/components/Hero";
+import Testimonial from "@/components/Testimonial";
 import TrustedCompanies from "@/components/TrustedCompanies";
 import UseCases from "@/components/UseCases";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <AssuranceSection />
         <AppWorkflow />
       </div>
+      <Testimonial />
     </div>
   );
 }
