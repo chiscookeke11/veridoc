@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 
@@ -8,7 +9,17 @@ export default function Footer() {
 
 
 
-            <div className=" max-w-7xl w-full flex  flex-col gap-16 items-start  " >
+            <div className=" max-w-7xl w-full flex flex-col md:flex-row gap-2 md:gap-10 md:items-center  " >
+
+                <Link href={"/"} className="ml-auto md:ml-0 "  >
+                    <Image
+                        className=" w-[150px] md:w-[250px] aspect-auto object-cover object-center "
+                        src={"/logos/logo.svg"}
+                        alt="logo"
+                        width={500}
+                        height={500}
+                    />
+                </Link>
 
                 <ul className="w-full flex flex-col md:flex-row md:items-center gap-7 md:gap-15 text-sm font-uncut text-black  " >
                     <li className=" opacity-70 hover:opacity-100 duration-300 ease-in-out transition-all " ><Link href={"#"} >Terms of Use</Link></li>
