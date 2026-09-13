@@ -63,7 +63,7 @@ export default function AppWorkflow() {
                             alt={`${step.title}-image`}
                             height={500} width={500}
                             className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]
-                            w-[85%] h-[55%] object-center object-cover hidden md:block
+                            w-[85%] h-[55%] object-center object-cover hidden md:block rounded-md
                              group-hover:translate-y-[-30%] group-hover:opacity-10 transition-all duration-400 ease-in-out  "
                         />
 

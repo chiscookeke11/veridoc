@@ -44,14 +44,23 @@ export default function UseCases() {
                                 key={i} className={`group w-full border-black/10 py-2 cursor-pointer ${i === 0 ? " border-t border-b " : "border-b"}`} >
 
                                 {/* accordion head  */}
-                                <div className="w-full py-2.5 px-1 flex items-center justify-start "  >
+                                <div className="w-full py-2.5 px-1 flex items-center justify-start gap-4 "  >
+
+                                    <Image
+                                        src={use_case.icon}
+                                        alt="icon"
+                                        width={1000}
+                                        height={1000}
+                                        className="size-6 "
+                                    />
+
                                     <h4 className="font-season-vf font-medium text-lg md:text-[22px] " > {use_case.title} </h4>
                                 </div>
 
                                 {/* accordion body  */}
                                 <div
                                     className={`overflow-hidden font-uncut text-sm md:text-xl text-[#000000] opacity-70
-    ${selected === i ? "h-20 max-h-fit py-5" : "h-0 py-0"}
+    ${selected === i ? "h-60 max-h-fit py-1" : "h-0 py-0"}
     duration-300 ease-in-out transition-all`}
                                 >
                                     {selected === i && (

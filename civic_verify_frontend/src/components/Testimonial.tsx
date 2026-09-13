@@ -28,7 +28,7 @@ export default function Testimonial() {
 
                 <div className=" md:basis-[33%] w-full h-75 md:h-[90%]  rounded-sm overflow-hidden relative " >
                     <Image
-                        src={"/people/mr-chidera.webp"}
+                        src={"/people/CEO.png"}
                         alt={`TheGreyIT Educational Consults`}
                         fill
                         className="h-full w-full top-0 left-0 absolute object-center object-cover "
@@ -41,7 +41,7 @@ export default function Testimonial() {
 
 
                     <Image
-                        src={"/logos/THEGREYAElogoBlack.webp"}
+                        src={"/logos/thegreyitlogo-white.webp"}
                         alt="logo"
                         width={200} height={200}
                         className="w-[120px] md:w-[200px] " />
@@ -51,10 +51,6 @@ export default function Testimonial() {
                     <p className="font-uncut text-base md:text-2xl  text-left font-normal gap-3 md:mt-10 " >CivicVerify AI makes verification simple.
                         The process is seamless, the results are accurate, and most importantly,
                         it gives us confidence in every document we verify.</p>
-
-
-                    <Link href={"#"} className="font-modern_era_mono pb-0.5 text-sm md:text-base border-white  border-b " >
-                        READ CUSTOMER STORIES </Link>
 
 
                     <div className="mt-auto w-full flex flex-col gap-4 md:flex-row items-end md:items-center justify-between font-modern_era_mono " >

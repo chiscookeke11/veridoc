@@ -7,7 +7,7 @@ export const StepData: steps_data_types[] = [
     {
         title: "Upload form and documents",
         description: "Submit the required information and supporting documents through a simple, secure workflow.",
-        img: "/use_cases_images/education.webp",
+        img: "/workflow_images/step1.png",
         call_to_action: "D/passport/certificate/document card",
         color: "#000000"
     },
@@ -15,7 +15,7 @@ export const StepData: steps_data_types[] = [
     {
         title: "AI extracts the information",
         description: "OCR automatically identifies and extracts key fields from your documents, turning unstructured information into usable data.",
-        img: "/use_cases_images/education.webp",
+        img: "/workflow_images/step2.png",
         call_to_action: "D/passport/certificate/document card",
         color: "#1888a2"
     },
@@ -23,7 +23,7 @@ export const StepData: steps_data_types[] = [
     {
         title: "Verify and generate results",
         description: "Extracted information is checked against trusted data sources to identify matches, inconsistencies, and potential risks.",
-        img: "/use_cases_images/education.webp",
+        img: "/workflow_images/step3.png",
         call_to_action: "D/passport/certificate/document card",
         color: "#007aff"
     }

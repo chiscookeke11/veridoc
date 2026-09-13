@@ -108,7 +108,7 @@ export default function TrustedCompanies() {
 
                     <div className="w-full h-full overflow-hidden rounded-lg group ">
                         <Image
-                            src={"/people/mr-chidera.webp"}
+                            src={"/people/CEO.png"}
                             alt={`TheGreyIT Educational Consults`}
                             width={1000} height={1000}
                             className="h-full w-full object-center object-cover group-hover:scale-110 duration-300 ease-in-out transform cursor-pointer "
@@ -142,17 +142,17 @@ export default function TrustedCompanies() {
                     <div className="w-full h-full flex flex-col items-start justify-between py-9 px-3 md:px-6   border-b border-t border-black/10 gap-6 md:gap-0" >
 
                         <div className=" space-y-4 md:space-y-8 " >
-                            <h4 className="font-modern_era_mono uppercase text-xs md:text-[15px] font-semibold tracking-wide " >Reduction in manual reviews</h4>
-                            <h5 className="font-uncut text-4xl md:text-[64px] font-semibold " >60%</h5>
+                            <h4 className="font-modern_era_mono uppercase text-xs md:text-[15px] font-semibold tracking-wide " >Increase in Verification Efficiency</h4>
+                            <h5 className="font-uncut text-4xl md:text-[64px] font-semibold " >72%</h5>
                         </div>
 
 
 
                         <Image
-                            src={"/logos/THEGREYAElogoBlack.webp"}
+                            src={"/logos/uniogate_logo.svg"}
                             alt="logo"
                             width={200} height={200}
-                            className="w-[120px] md:w-[200px] " />
+                            className="w-[120px] md:w-[200px] brightness-0 dark:brightness-0 invert-0 " />
 
                     </div>
 
