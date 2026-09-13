@@ -9,9 +9,9 @@ export default function AssuranceSection() {
          pb-12 md:pb-52 px-8 flex flex-col items-center gap-10
          " >
 
-            <div className="w-full h-px bg-black/10" />
+            <div className="w-full h-px hidden md:block bg-black/10" />
 
-            <span className="absolute -top-2.5 left-0 " >
+            <span className="absolute -top-2.5 left-0 hidden md:block " >
                 <Plus size={20} color="#071c3f" />
             </span>
 

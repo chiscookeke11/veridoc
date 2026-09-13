@@ -12,10 +12,10 @@ export default function Navbar() {
             <AppLogo />
 
             <ul className="hidden md:flex" >
-                <li>Links</li>
+                {/* <li>Links</li> */}
             </ul>
 
-        <CustomButton
+            <CustomButton
                 className="font-modern_era_mono uppercase text-sm md:text-base "
                 variant="primary"
                 icon={<ArrowDownToLine size={16} />}
