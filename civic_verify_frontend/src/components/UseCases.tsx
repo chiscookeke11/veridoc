@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import { use_cases_data } from "../../data/use_cases_data";
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 
 
@@ -95,15 +95,25 @@ export default function UseCases() {
 
 
                 {/* The use case image */}
-                <div className=" hidden md:flex basis-1/2 bg-amber-300 self-stretch overflow-hidden " >
-
-                    <Image
-                        src={use_cases_data[selected].image}
-                        alt={use_cases_data[selected].title}
-                        height={500} width={500}
-                        className="object-cover object-center w-full h-full  "
-                    />
-
+                <div className="hidden md:flex basis-1/2 h-[700px] max-w-[500px] self-center overflow-hidden rounded-sm">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={selected}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="w-full h-full"
+                        >
+                            <Image
+                                src={use_cases_data[selected].image}
+                                alt={use_cases_data[selected].title}
+                                height={500}
+                                width={500}
+                                className="object-contain object-center w-full h-full rounded-md"
+                            />
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
 
             </div>
