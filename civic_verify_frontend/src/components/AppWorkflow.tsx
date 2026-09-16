@@ -1,13 +1,41 @@
+"use client"
+
+
 import { Plus } from "lucide-react";
 import { StepData } from "../../data/steps_data";
 import Image from "next/image";
+import { motion, type Variants } from "framer-motion";
 
 
 
 export default function AppWorkflow() {
+
+
+    const containerVariants: Variants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    const cardVariants: Variants = {
+        hidden: {
+            y: "200%",
+        },
+        visible: {
+            y: 0,
+            transition: {
+                duration: 0.4,
+                ease: "easeOut",
+            },
+        },
+    };
+
     return (
         <section className="w-full max-w-7xl  mx-auto relative text-black font-season-vf
-         pb-12 md:pb-52 px-8 flex flex-col items-start gap-4 " >
+         pb-12 md:pb-52 px-8 flex flex-col items-start gap-4 overflow-hidden" >
 
 
             <h3 className=" text-3xl md:text-5xl font-medium leading-[114%] text-[#000000] md:w-[80%] ">AI-powered verification, from upload to decision</h3>
@@ -15,7 +43,15 @@ export default function AppWorkflow() {
 
 
 
-            <div className="mt-14 w-full relative  justify-center min-h-[60vh]  p-2
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{
+                    once: true,
+                    amount: 0.2,
+                }}
+                className="mt-14 w-full relative  justify-center min-h-[60vh]  p-2
             grid grid-cols-1 md:grid-cols-3 place-items-center justify-items-center gap-5
             " >
 
@@ -43,7 +79,8 @@ export default function AppWorkflow() {
 
 
                 {StepData.map((step, i) => (
-                    <div
+                    <motion.div
+                        variants={cardVariants}
                         style={{
                             backgroundColor: step.color,
                             color: "#ffffff"
@@ -80,10 +117,10 @@ export default function AppWorkflow() {
                             </span>
                         </div>
 
-                    </div>
+                    </motion.div>
                 ))}
 
-            </div>
+            </motion.div>
 
 
         </section>

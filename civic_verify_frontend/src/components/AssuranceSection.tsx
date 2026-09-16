@@ -1,9 +1,27 @@
+"use client"
+
 import { Plus } from "lucide-react";
 import Image from "next/image";
-
+import { easeInOut, motion } from "framer-motion"
 
 
 export default function AssuranceSection() {
+
+
+    const imageVariants = {
+        hidden: {
+            y: "50%",
+        },
+        visible: {
+            y: 0,
+            transition: {
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1] as const,
+            },
+        },
+    };
+
+
     return (
         <section className="w-full max-w-7xl  mx-auto relative text-black font-season-vf
          pb-12 md:pb-52 px-8 flex flex-col items-center gap-10
@@ -33,37 +51,53 @@ export default function AssuranceSection() {
 
             <div
                 className="
-    relative w-full bg-[#BCA2CC]
-    md:h-[65vh]
-    rounded-md
-    flex items-center justify-end
-    pt-10
-    overflow-hidden md:mt-5
-  "
+        relative w-full bg-[#BCA2CC]
+        md:h-[65vh]
+        rounded-md
+        flex items-center justify-end
+        pt-10
+        overflow-hidden md:mt-5
+    "
             >
                 {/* Grid */}
                 <div
                     className="
-        absolute inset-0
-        pointer-events-none
-        opacity-40
-        bg-[length:16px_16px]
-        md:bg-[length:24px_24px]
-    "
+            absolute inset-0
+            pointer-events-none
+            opacity-40
+            bg-[length:16px_16px]
+            md:bg-[length:24px_24px]
+        "
                     style={{
                         backgroundImage: `
-            url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 8v8M8 12h8' stroke='%23ffffff' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E")
-        `,
+                url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 8v8M8 12h8' stroke='%23ffffff' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E")
+            `,
                     }}
                 />
 
-                <Image
-                    src="/screen_images/a.png"
-                    alt="app screen"
-                    height={1000}
-                    width={1000}
-                    className="relative z-10 object-bottom object-contain h-full w-[90%] md:w-[80%] mx-auto"
-                />
+                {/* Target / animation trigger */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{
+                        once: true,
+                        amount: 0.3,
+                    }}
+                    className="relative z-10 h-full w-full"
+                >
+                    <motion.div
+                        variants={imageVariants}
+                        className="relative h-full w-[90%] md:w-[80%] mx-auto"
+                    >
+                        <Image
+                            src="/screen_images/a.png"
+                            alt="app screen"
+                            height={1000}
+                            width={1000}
+                            className="object-bottom object-contain h-full w-full"
+                        />
+                    </motion.div>
+                </motion.div>
             </div>
 
         </section>

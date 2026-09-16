@@ -1,13 +1,41 @@
+"use client"
+
+
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
 
 
 
 
 export default function Testimonial() {
+
+    const containerVariants: Variants = {
+        hidden: {
+            opacity: 0,
+        },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.4,
+            },
+        },
+    };
+
+
+
     return (
-        <section className="bg-[#121012] w-full py-16 md:py-30 px-[5%] lg:px-[14%] flex flex-col items-start  gap-6 " >
+        <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+                once: true,
+                amount: 0.2,
+            }
+            }
+            variants={containerVariants}
+            className="bg-[#121012] w-full py-16 md:py-30 px-[5%] lg:px-[14%] flex flex-col items-start  gap-6 " >
 
 
             <h3 className=" text-3xl md:text-5xl font-medium leading-[114%] text-[#ffffff] md:w-[80%] font-season-vf ">Building trust at every step of verification</h3>
@@ -85,6 +113,6 @@ export default function Testimonial() {
             </div>
 
 
-        </section>
+        </motion.section >
     )
 }
