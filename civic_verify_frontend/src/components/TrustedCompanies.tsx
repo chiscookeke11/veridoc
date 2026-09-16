@@ -2,6 +2,7 @@ import Link from "next/link";
 import Marquee from "react-fast-marquee";
 import { trusted_organizations_data } from "../../data/trusted_organizations_data";
 import Image from "next/image";
+import AnimatedNumber from "./AnimatedNumber";
 
 
 
@@ -124,7 +125,9 @@ export default function TrustedCompanies() {
 
                         <div className=" space-y-4 md:space-y-8 " >
                             <h4 className="font-modern_era_mono uppercase text-xs md:text-[15px] font-semibold tracking-wide " >Reduction in manual reviews</h4>
-                            <h5 className="font-uncut text-4xl md:text-[64px]  font-semibold " >60%</h5>
+                            <h5 className="font-uncut text-4xl md:text-[64px]  font-semibold " >
+                                <AnimatedNumber value={60} />
+                            </h5>
                         </div>
 
 
@@ -143,7 +146,9 @@ export default function TrustedCompanies() {
 
                         <div className=" space-y-4 md:space-y-8 " >
                             <h4 className="font-modern_era_mono uppercase text-xs md:text-[15px] font-semibold tracking-wide " >Increase in Verification Efficiency</h4>
-                            <h5 className="font-uncut text-4xl md:text-[64px] font-semibold " >72%</h5>
+                            <h5 className="font-uncut text-4xl md:text-[64px] font-semibold " >
+                                <AnimatedNumber value={72} />
+                            </h5>
                         </div>
 
 
