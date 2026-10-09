@@ -1,5 +1,6 @@
 import { ArrowDownToLine, Plus } from "lucide-react";
 import CustomButton from "./ui_components/CustomButton";
+import DocumentScanner from "./document_scanner_component/DocumentScanner";
 
 
 
@@ -33,6 +34,9 @@ export default function Hero() {
 
 
             <div className=" h-full basis-1/2 w-full flex items-center justify-center flex-col  border-b-[0.5px]  border-white/10  border-r-[0.5px] border-l-[0.5px] " >
+
+                <DocumentScanner />
+
             </div>
 
 

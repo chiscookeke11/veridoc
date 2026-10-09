@@ -1,0 +1,60 @@
+.stage{position:relative;width:100%;height:100%;min-height:560px;overflow:hidden;background:#0b1f4e;color:#fff;font-family:Inter,system-ui,sans-serif}
+.stage *{box-sizing:border-box}
+.glow{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(90px);top:50%;transform:translateY(-50%);pointer-events:none}
+.glowL{left:calc(50% - 440px);background:#2a45ff88}
+.glowR{left:calc(50% - 80px);background:#6bff9a33;transition:background .6s}
+.glowR.bad{background:#ff4d4d33}
+.frame{position:absolute;left:6%;right:6%;top:14%;bottom:14%;border:1px solid #ffffff1c;border-width:1px 1px 0;pointer-events:none}
+.frame b{position:absolute;top:-9px;font-weight:300;font-size:20px;line-height:1}
+.frame b:first-child{left:-6px}.frame b:last-child{right:-6px}
+.dots{position:absolute;left:0;right:0;top:calc(50% + 100px);height:150px;opacity:.15;transition:opacity .5s;pointer-events:none;
+ background:radial-gradient(circle,#5b7bff 1.2px,transparent 1.6px) 0 0/10px 10px;
+ -webkit-mask:linear-gradient(transparent,#000 40%,transparent);mask:linear-gradient(transparent,#000 40%,transparent)}
+.scanning .dots{opacity:.9;animation:dp 1.2s ease-in-out infinite}
+@keyframes dp{50%{opacity:.45}}
+
+.track{position:absolute;top:50%;left:0;display:flex;gap:16px;transition:transform .9s cubic-bezier(.65,0,.25,1)}
+.nt{transition:none}
+.mini{width:236px;flex:none;background:#0a1a4acc;border:1px solid #2f4fc055;border-radius:6px;padding:14px 14px 8px;font-size:11px;box-shadow:0 0 0 3px #ffffff06}
+.mini.hid{visibility:hidden}
+.mini.ok{border-color:#5bf29a55;box-shadow:0 0 22px #5bf29a22}
+.mini h4{margin:0 0 10px;font-size:13px;font-weight:500;display:flex;justify-content:space-between;align-items:center;gap:6px;white-space:nowrap;min-height:20px}
+.mrow{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid #ffffff12;font:9px ui-monospace,monospace;color:#8ea2e0;letter-spacing:.06em}
+.mrow b{color:#e8edff;font-weight:400;font-size:10px}
+
+.pill{font:600 10px system-ui,sans-serif;padding:3px 8px;border-radius:3px;animation:pillIn .3s ease-out}
+.pill.ok{background:#aaf8c0;color:#0a6b2a}
+.pill.no{background:#ffc9c9;color:#b00020}
+@keyframes pillIn{from{color:transparent}60%{color:transparent}}
+
+.hero{position:absolute;left:50%;top:50%;width:min(380px,92%);transform:translate(-50%,-50%);border:1px solid #ffffff40;border-radius:14px;padding:8px;background:#ffffff12;box-shadow:0 0 80px #3b5bff66;transition:opacity .4s,filter .4s}
+.hero.off{opacity:0;filter:blur(6px)}
+.card{background:#3b4de0;border-radius:8px;padding:20px 18px 14px}
+.hd{display:flex;justify-content:space-between;align-items:flex-start}
+.hd h2{margin:0;font-size:20px;font-weight:500}
+.sub{font:12px ui-monospace,monospace;color:#b9c3ff;margin-top:10px}
+
+.ring{width:42px;height:42px;flex:none;margin:2px 4px 0 0}
+.ring circle{fill:none;stroke-width:2.5}
+.ringBg{stroke:#ffffff30}
+.ringFg{stroke:#fff;stroke-linecap:round;stroke-dasharray:113;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset .6s,stroke .3s}
+.ring path{fill:none;stroke:#ffffff55;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.ring.done path{stroke:#fff}
+.ring.bad .ringFg,.ring.bad path{stroke:#ffb3b3}
+
+.cred{margin-top:14px;background:#8b96ef;border-radius:7px;padding:12px 8px 4px}
+.credLabel{margin:0 0 10px 6px;font-size:13px;color:#e9ecff}
+.credLabel span{color:#c5ccff;transition:color .4s}
+.credLabel.lit span{color:#e9ecff}
+.row{background:#fff;color:#111;border-radius:5px;padding:9px 12px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;min-height:52px;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.row.in{opacity:1;transform:none}
+.row small{display:block;font:8px ui-monospace,monospace;letter-spacing:.09em;color:#778;margin-bottom:4px}
+.v{font-size:15px}
+.sc{font-size:14px}.sc span{color:#999}
+.tag{display:inline-block;font-size:9px;font-weight:600;padding:3px 6px;border-radius:3px;background:#d4e3ff;color:#123;margin-top:4px}
+.ld{display:flex;gap:3px}
+.ld i{width:6px;height:6px;background:#2a3050;opacity:.2;animation:blink .8s infinite}
+.ld i:nth-child(2){animation-delay:.1s}.ld i:nth-child(3){animation-delay:.2s}.ld i:nth-child(4){animation-delay:.3s}
+@keyframes blink{40%{opacity:.9}}
+.sl{display:flex;align-items:center;min-width:76px;justify-content:flex-end}
+.sl .pill{font-size:11px;padding:4px 8px}
