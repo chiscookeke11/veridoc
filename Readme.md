@@ -229,20 +229,3 @@ backend/
 ├── tests/                    # pytest unit tests
 └── packaging/                # Windows installer files
 ```
-
----
-
-## Limitations
-
-- OCR currently covers **English / Latin-script** documents. Non-Latin scripts are not supported by QVAC's current OCR models.
-- A small local model can still misread or mis-extract a field, which is why every extracted field is editable by the officer before verification, and why verification itself uses fixed rules rather than the model.
-- The first run on a new machine needs internet to download the models.
-- Inference runs one request at a time.
-- Tested so far on synthetic documents and a synthetic registry, not on real government records.
-- The Windows installer under `packaging/` has not yet been updated for QVAC (it still bundles the old Tesseract and GGUF files).
-
----
-
-## Built with
-
-[QVAC](https://qvac.tether.io/) by Tether: local-first AI inference. SDK docs: https://docs.qvac.tether.io/
