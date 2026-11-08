@@ -1,49 +1,56 @@
 """
-OCRService — extract(path) -> raw text.
+OCRService - extract(path) -> raw text, powered by QVAC OCR.
 
-Default engine: pytesseract (offline, no API calls — required for the
-"no cloud APIs" constraint). PDFs are rasterized page-by-page first.
-
-Swap point: if you later move to a different OCR engine, only this file
-changes — Workflow and everything downstream only depend on raw text in.
+Same public contract as before: Workflow and everything downstream only depend
+on raw text coming out of extract(). PDFs are still rasterized page-by-page
+first (pdf2image + poppler), then each page image goes through QVAC OCR.
 """
 
 from __future__ import annotations
 
-import os
+import tempfile
 from pathlib import Path
 
-import pytesseract
 from PIL import Image
 
-# Packaged/installed version points this at a bundled portable Tesseract
-# via launcher.pyw; unset in normal dev, where Tesseract is just on PATH.
-if os.getenv("CIVICVERIFY_TESSERACT_CMD"):
-    pytesseract.pytesseract.tesseract_cmd = os.environ["CIVICVERIFY_TESSERACT_CMD"]
+from app.services.qvac_runtime import get_runtime
+
+_NATIVE = {".png", ".jpg", ".jpeg", ".bmp"}  # formats shown in the QVAC OCR docs
 
 
 class OCRService:
     def __init__(self, lang: str = "eng"):
+        # kept for API compatibility; the QVAC OCR model is configured in
+        # qvac_runtime.OCR_CONFIG (English / Latin script).
         self.lang = lang
 
     def extract(self, path: str) -> str:
         """Return raw OCR text for a single document (image or PDF)."""
         suffix = Path(path).suffix.lower()
-
         if suffix == ".pdf":
             return self._extract_pdf(path)
         return self._extract_image(path)
 
     def _extract_image(self, path: str) -> str:
-        with Image.open(path) as img:
-            return pytesseract.image_to_string(img, lang=self.lang).strip()
+        if Path(path).suffix.lower() in _NATIVE:
+            return get_runtime().ocr_text(path).strip()
+
+        # TIFF / WebP / etc.: convert to a temporary PNG first
+        with tempfile.TemporaryDirectory() as tmp:
+            png = Path(tmp) / "page.png"
+            with Image.open(path) as img:
+                img.convert("RGB").save(png)
+            return get_runtime().ocr_text(str(png)).strip()
 
     def _extract_pdf(self, path: str) -> str:
-        # Local import — pdf2image needs poppler, only pull it in when needed.
+        # Local import - pdf2image needs poppler, only pull it in when needed.
         from pdf2image import convert_from_path
 
         pages = convert_from_path(path, dpi=200)
-        texts = []
-        for page in pages:
-            texts.append(pytesseract.image_to_string(page, lang=self.lang))
+        texts: list[str] = []
+        with tempfile.TemporaryDirectory() as tmp:
+            for i, page in enumerate(pages):
+                png = Path(tmp) / f"page_{i}.png"
+                page.convert("RGB").save(png)
+                texts.append(get_runtime().ocr_text(str(png)))
         return "\n\n".join(t.strip() for t in texts if t.strip())

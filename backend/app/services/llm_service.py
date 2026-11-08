@@ -1,10 +1,9 @@
 """
-LLMService — local-only, via llama-cpp-python. No network calls, matching
-the "External network calls: 0" target in your README.
+LLMService - local-only, via the QVAC SDK (see qvac_runtime.py). No network
+calls at inference time, matching the "External network calls: 0" target.
 
-The model is loaded once (module-level cache) and reused across requests —
-loading a 3-4B GGUF per call would blow through your <60s-per-case and
-<7GB-RAM targets fast.
+The model is loaded once and reused across requests (qvac_runtime keeps it
+resident) - loading per call would blow through the <60s-per-case target.
 
 Two required calls into the model per case, per your README:
 1. extract_fields(text)              -> ExtractedFields
@@ -12,24 +11,15 @@ Two required calls into the model per case, per your README:
 Plus one optional one your README mentions as a feature:
 3. generate_applicant_reply(...)     -> str (English / Pidgin / Yoruba)
 
-Chat templating is handled by llama-cpp-python's create_chat_completion(),
-which reads the chat template baked into the GGUF's metadata.
+Swap point: everything model-specific lives in _chat() and qvac_runtime.py.
 """
 
 from __future__ import annotations
 
 import json
-import os
-from functools import lru_cache
-from pathlib import Path
-
-from llama_cpp import Llama
 
 from app.schemas import ExtractedFields
-
-MODEL_PATH = os.getenv("CIVICVERIFY_MODEL_PATH", "models/model.Q4_K_M.gguf")
-N_CTX = int(os.getenv("CIVICVERIFY_N_CTX", "4096"))  # short context, per README
-N_THREADS = int(os.getenv("CIVICVERIFY_N_THREADS", str(os.cpu_count() or 4)))
+from app.services.qvac_runtime import get_runtime
 
 _EXTRACTION_SYSTEM = """You extract structured candidate fields from noisy OCR text \
 of Nigerian academic/ID documents. Respond with ONLY a JSON object, nothing else — \
@@ -52,21 +42,9 @@ case summary given. 2-3 sentences. Respectful, plain language, no jargon. Output
 reply text."""
 
 
-@lru_cache(maxsize=1)
-def _get_llm() -> Llama:
-    model_path = Path(MODEL_PATH)
-    if not model_path.exists():
-        raise FileNotFoundError(
-            f"GGUF model not found at '{MODEL_PATH}'. Set CIVICVERIFY_MODEL_PATH or drop "
-            f"a 3-4B Q4_K_M model into models/ (see README)."
-        )
-    return Llama(
-        model_path=str(model_path),
-        n_ctx=N_CTX,
-        n_threads=N_THREADS,
-        n_gpu_layers=0,  # CPU-only — matches the offline/8GB-laptop constraint
-        verbose=False,
-    )
+def _get_llm():
+    """Warm the model (kept so test_timing.py can still pre-load before timing)."""
+    return get_runtime().warmup_llm()
 
 
 class LLMService:
@@ -94,23 +72,9 @@ class LLMService:
         return self._chat(system, case_summary, max_tokens=200, temperature=0.4).strip()
 
     def _chat(self, system: str, user: str, max_tokens: int, temperature: float) -> str:
-        llm = _get_llm()
-        response = llm.create_chat_completion(
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            max_tokens=max_tokens,
-            temperature=temperature,
-            stream=False,  # explicit: guarantees the dict form, not the streaming iterator
+        return get_runtime().chat(
+            system, user, max_tokens=max_tokens, temperature=temperature
         )
-
-        # response is always the dict form here since stream=False; Pylance's
-        # static type is still the union of both possible return types, so we
-        # silence the index-on-iterator warning rather than importing internal
-        # llama_cpp response types that might not be stable across versions.
-        message = response["choices"][0]["message"]  # type: ignore[index]
-        return message.get("content") or ""
 
 
 def _parse_json_loose(raw: str) -> dict:

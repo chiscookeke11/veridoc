@@ -1,9 +1,11 @@
+
+--find-links https://github.com/tetherto/qvac/releases/expanded_assets/sdk-v0.23.0
+tetherto-qvac-sdk==0.23.0
+
 sqlalchemy>=2.0
 pydantic>=2.0
 streamlit>=1.35
 pandas
-llama-cpp-python
-pytesseract
 pillow
 pdf2image
 pytest
